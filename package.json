@@ -1,0 +1,29 @@
+{
+  "name": "hexo-deployer-onesignal",
+  "version": "0.0.0",
+  "description": "Hexo plugin for send push notifications through onesingal.com once deploy is called.",
+  "main": "index.js",
+  "scripts": {
+    "eslint": "eslint .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jrbenito/hexo-deployer-onesignal.git"
+  },
+  "keywords": [
+    "hexo",
+    "onesignal",
+    "push"
+  ],
+  "author": "Josenivaldo Benito Junior <jrbenito@benito.qsl.br> (https://benito.com.br)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jrbenito/hexo-deployer-onesignal/issues"
+  },
+  "homepage": "https://github.com/jrbenito/hexo-deployer-onesignal#readme",
+  "devDependencies": {
+    "eslint": "^3.18.0",
+    "eslint-config-hexo": "^1.0.3"
+  }
+}
