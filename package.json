@@ -1,6 +1,6 @@
 {
   "name": "hexo-deployer-onesignal",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Hexo plugin for send push notifications through onesingal.com once deploy is called.",
   "main": "index.js",
   "scripts": {
