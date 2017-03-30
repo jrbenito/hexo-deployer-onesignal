@@ -2,50 +2,48 @@
 
 var expect = require('chai').expect; // eslint-disable-line
 var pathFn = require('path');
-var util = require('hexo-util');
-var fs = require('hexo-fs');
-var spawn = util.spawn;
+//var util = require('hexo-util');
+//var fs = require('hexo-fs');
+//var spawn = util.spawn;
 
 describe('deployer', function() {
 	var baseDir = pathFn.join(__dirname, 'deployer_test');
 	var publicDir = pathFn.join(baseDir, 'public');
 
-	var ctx = {
-		base_dir: baseDir,
-		public_dir: publicDir,
-		log: {
-			info: function() {},
-            console: function(args) {
-                ctx.log.buffer = args;
-                return ;
+    var ctx = {
+        log: {
+            buffer: '',
+        }
+    };
+
+    ctx.logger = function() {
+        for (var i = 0; i < arguments.length; i++) {
+            if (i > 0) {
+                ctx.log.buffer += ' ';
             }
-		}
-	};
+            ctx.log.buffer += arguments[i];
+        }
+    }
+
+	ctx.base_dir = baseDir;
+    ctx.public_dir = publicDir;
+    ctx.log.info = ctx.logger;
+    ctx.log.console = ctx.logger;
+    ctx.log.error = ctx.logger;
+
+
+	var config_example = {};
 
 	var deployer = require('../lib/deployer').bind(ctx);
 
+    beforeEach(function () {
+        ctx.log.buffer = '';
+        config_example = {
+            app_id: "UUID app ID",
+            app_auth_key: "Token app",
+        };
+    });
 
-/*	after(function() {
-		return fs.rmdir(baseDir);
-	});
-
-	function validate(branch) {
-		branch = branch || 'master';
-
-		// Clone the remote repo
-		return spawn('git', ['clone', fakeRemote, validateDir, '--branch', branch]).then(function() {
-			// Check the branch name
-			return fs.readFile(pathFn.join(validateDir, '.git', 'HEAD'));
-		}).then(function(content) {
-			content.trim().should.eql('ref: refs/heads/' + branch);
-
-			// Check files
-			return fs.readFile(pathFn.join(validateDir, 'foo.txt'));
-		}).then(function(content) {
-			content.should.eql('foo');
-		});
-	}
-*/
 	it('should warning about no configuration', function() {
 
 		var help = '';
@@ -63,8 +61,22 @@ describe('deployer', function() {
 		help += '$ export ONESGINAL_APP_AUTH_KEY="<onesignal auth token>"\n';
 
         deployer();
-        expect(ctx.log.buffer).to.be.a('string');
-        expect(ctx.log.buffer).to.equal(help);
+        expect(ctx.log.buffer).to.be.a('string')
+          .and.equal(help);
     });
+
+    it('must return Error if no template file found', function() {
+        config_example.app_template_file = 'not-exist.txt';
+        
+        expect(deployer(config_example)).to.be.an.instanceOf(Error);
+        expect(ctx.log.buffer).to.be.a('string')
+          .and.have.string('Template file not found: ');
+    });
+
+    it('must find default template', function() {
+        deployer(config_example);
+        expect(ctx.log.buffer).to.be.a('string')
+          .and.have.string('');
+    })
 
 });
