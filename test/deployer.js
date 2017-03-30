@@ -55,14 +55,14 @@ describe('deployer', function() {
 		help += '    type: onesignal\n';
 		help += '    app_id: <onesingal app uuid>\n';
 		help += '    app_auth_key: <onesignal auth token>\n';
-		help += '    app_template_id: <message template id>\n\n';
+		help += '    app_template_file: <message template file, default will be used if not informed>\n\n';
 		help += '[CAUTION] Do not version (git) your config file if app_auth_key is specified!\n';
 		help += '          Alternativily do not define it in _config.yml but as enviroment\n';
 		help += '          variable.\n\n';
 		help += 'Example:\n';
 		help += '$ export ONESGINAL_APP_AUTH_KEY="<onesignal auth token>"\n';
 
-        deployer()
+        deployer();
         expect(ctx.log.buffer).to.be.a('string');
         expect(ctx.log.buffer).to.equal(help);
     });
