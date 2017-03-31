@@ -61,4 +61,5 @@ Users subscribed to the site/app will receive notification. See Onesignal dashbo
 
 Site visitors need a interface to subscribe/unsubscribe notifications for a given hexo site. [This guide](https://documentation.onesignal.com/v3.0/docs/web-push-setup) teachs how.
 
-[Tranquilpeak](https://github.com/LouisBarranqueiro/hexo-theme-tranquilpeak) theme for hexo has interface implemented at theme level.
+[Tranquilpeak](https://github.com/LouisBarranqueiro/hexo-theme-tranquilpeak) theme for hexo has interface implemented at theme level. (not yet released at the time of this write, 
+[PR #396](https://github.com/LouisBarranqueiro/hexo-theme-tranquilpeak/pull/396))
