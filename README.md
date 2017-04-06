@@ -41,6 +41,17 @@ deploy:
    - type: onesignal
      app_id: abcdefab-ab34-1abc-c123456789ab
 ```
+### Options
+
+-*app_id*
+ Is the UUID of the Onesignal app to be notified.
+
+-*app_auth_key*
+ Is the API key provided by Onesginal to access API server, it should be kept secret.
+
+-*app_send_delay*
+ This shall be expressed in minutes (integer number) and will introduce a delay of `n` minutes before notification dispatch to subscribers.
+ since this is a feature from Onesginal service it will not hold deployer for delay time.
 
 ## Usage
 
